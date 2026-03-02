@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Dispenser" Id="{c41dc19d-18c8-416a-bdf6-55f7b512e9fa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Dispenser EXTENDS FB_PackML_BaseModule IMPLEMENTS I_Dispenser
+VAR
+	// Interfaces
+	Pump	:	I_Pump;
+	Scale	:	I_Scale;
+	
+	// FBs
+	DcPump		: FB_DcPump;
+	SerialScale	: FB_SerialScale;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="ChangeMode" Id="{ae57d5d3-047a-4033-9529-ea645fd3affd}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD ChangeMode
+VAR_INPUT
+	Mode	: SPT_BaseTypes.E_PMLUnitMode;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ChangeState" Id="{0779d0e4-e037-4829-a5fc-79ccc358f1df}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD ChangeState
+VAR_INPUT
+	State	: SPT_BaseTypes.E_PMLCommand;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="CurrentMode" Id="{996abd19-e6f0-48fd-8c7b-44e79077ef27}">
+      <Declaration><![CDATA[{error 'Add property implementation or delete property to use base implementation'}
+PROPERTY CurrentMode : SPT_BaseTypes.E_PMLUnitMode
+]]></Declaration>
+      <Get Name="Get" Id="{0c6e7251-28eb-4828-b8d1-0a87c9e0effa}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="CurrentState" Id="{c4f8866d-7853-44e7-9287-53e037447fdf}">
+      <Declaration><![CDATA[{error 'Add property implementation or delete property to use base implementation'}
+PROPERTY CurrentState : SPT_BaseTypes.E_PMLState
+]]></Declaration>
+      <Get Name="Get" Id="{d7d21b1c-5606-4ba7-8782-9c7ac2e0986f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="CyclicLogic" Id="{07572f53-0d4a-4171-8afe-15b5f8b0f9d6}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD CyclicLogic
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Dispensing" Id="{6d2b9f7b-6359-405c-b9ec-8f7410aa8d45}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY Dispensing : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{b4785766-2e72-4600-9375-aefab15567a0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Done" Id="{b0948b1c-3098-4d2b-91cf-ca6aa79a7367}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY Done : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{a4c4d789-6df0-40b0-b637-5aa73cdc84da}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="StartDispense" Id="{ae324062-b3bd-4131-b4f3-edebd387f563}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD StartDispense
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stop" Id="{f17e11d8-8278-4919-a3e4-08940dc34e68}">
+      <Declaration><![CDATA[METHOD Stop
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TargetWeight" Id="{e01fc650-802b-4b27-9fc8-3cbf080d8d9c}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY TargetWeight : LREAL
+]]></Declaration>
+      <Get Name="Get" Id="{d29f0bf3-01fc-409a-800c-0cfa643300ee}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{e931f160-f032-4882-b42b-9256e975cdaa}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

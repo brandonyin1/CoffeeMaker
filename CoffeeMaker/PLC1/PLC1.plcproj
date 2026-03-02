@@ -22,6 +22,45 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Component\FBs\FB_ImmersionHeater.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Component\FBs\FB_DcPump.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Component\FBs\FB_SerialScale.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Component\FBs\FB_RtdSensor.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Component\Interfaces\I_HeatingElement.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Component\Interfaces\I_Pump.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Component\Interfaces\I_Scale.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Component\Interfaces\I_TempSensor.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Equipment\FBs\FB_Boiler.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Equipment\FBs\FB_Dispenser.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Equipment\Interfaces\I_Dispenser.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Equipment\Interfaces\I_Boiler.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Machine\FB_Machine.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -29,10 +68,21 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\Component\Interfaces" />
+    <Folder Include="POUs\Component\FBs" />
+    <Folder Include="POUs\Equipment" />
+    <Folder Include="POUs\Component" />
+    <Folder Include="POUs\Equipment\Interfaces" />
+    <Folder Include="POUs\Equipment\FBs" />
+    <Folder Include="POUs\Machine" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="SPT Base Types">
+      <DefaultResolution>SPT Base Types, * (Beckhoff Automation LLC)</DefaultResolution>
+      <Namespace>SPT_BaseTypes</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -47,6 +97,11 @@
       <SystemLibrary>true</SystemLibrary>
     </PlaceholderReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="PLC1.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
@@ -57,6 +112,12 @@
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
         <o>
           <v n="Name">"{192FAD59-8248-4824-A8DE-9177C94C195A}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{246001F4-279D-43AC-B241-948EB31120E1}</v>
+        <o>
+          <v n="Name">"{246001F4-279D-43AC-B241-948EB31120E1}"</v>
           <d n="SubKeys" t="Hashtable" />
           <d n="Values" t="Hashtable" />
         </o>

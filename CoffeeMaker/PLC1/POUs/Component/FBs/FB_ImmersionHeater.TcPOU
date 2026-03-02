@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ImmersionHeater" Id="{919b0c87-9c83-4383-a90a-2f8eb0f0c477}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ImmersionHeater EXTENDS FB_ComponentBase IMPLEMENTS I_HeatingElement
+VAR
+	_InSimulation : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CyclicLogic" Id="{45933a60-97dc-4460-9f93-d44e2be01b87}">
+      <Declaration><![CDATA[//{warning 'Add method implementation '}
+METHOD CyclicLogic
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _InSimulation THEN
+	CyclicSimulate();
+ELSE
+	;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CyclicSimulate" Id="{976eac1b-3866-4cc5-bd64-8eff3f359b98}">
+      <Declaration><![CDATA[METHOD CyclicSimulate
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="InSimulation" Id="{5acb5a22-956f-45a6-b0e6-4f08a4cb1ccd}">
+      <Declaration><![CDATA[PROPERTY InSimulation : BOOL]]></Declaration>
+      <Get Name="Get" Id="{4cfe8c45-336a-4db0-a934-ced2417e501d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InSimulation := _InSimulation;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d3682f48-cc9a-4205-985c-4b4fc0fb16e3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_InSimulation := InSimulation;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Off" Id="{756579f5-dc61-48fe-a62c-510143c9686b}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Off : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="On" Id="{167a6964-09ad-4d71-99ca-8e28f19c878e}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD On : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

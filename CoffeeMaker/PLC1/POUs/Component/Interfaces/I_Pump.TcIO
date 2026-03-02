@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Pump" Id="{d78329b0-a379-4c56-b3ca-f9a2852ddf70}">
+    <Declaration><![CDATA[INTERFACE I_Pump EXTENDS I_ComponentBase
+]]></Declaration>
+    <Property Name="Speed" Id="{e17b8117-c438-4504-8a36-37d094e1b151}">
+      <Declaration><![CDATA[PROPERTY Speed : LREAL]]></Declaration>
+      <Get Name="Get" Id="{b0fb3859-fd3e-43c7-bf9d-6c5e78830cbc}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{a519748c-697d-4b21-b608-ed0fdacc2b50}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Method Name="Start" Id="{b65a9d77-77cd-4864-b72f-c075c548bcb5}">
+      <Declaration><![CDATA[METHOD Start : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Stop" Id="{f6f9a771-cf2b-44bb-8862-463f7d17dd3f}">
+      <Declaration><![CDATA[METHOD Stop
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Dispenser" Id="{f78910ca-865b-4ef6-bdfb-c96ba1d3465c}">
+    <Declaration><![CDATA[INTERFACE I_Dispenser EXTENDS I_PackML_BaseModule
+]]></Declaration>
+    <Property Name="Dispensing" Id="{c1e046dd-72a7-4e90-827f-8c7d1bb36233}">
+      <Declaration><![CDATA[PROPERTY Dispensing : BOOL]]></Declaration>
+      <Get Name="Get" Id="{1e3e2c80-a3f0-40e2-a392-9376417c4588}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Done" Id="{20099ee9-a32c-49e2-b7a2-3f18a87e55f9}">
+      <Declaration><![CDATA[PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{813a446f-0b3c-4c1e-ae5f-bde5bea07515}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="StartDispense" Id="{9660b906-1de7-483c-84b9-5929a946956a}">
+      <Declaration><![CDATA[METHOD StartDispense
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Stop" Id="{55e0de1f-1399-4362-9e7b-e940759441f3}">
+      <Declaration><![CDATA[METHOD Stop
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="TargetWeight" Id="{d5ec495c-48c1-4ee2-a130-fadd7a65a7f1}">
+      <Declaration><![CDATA[PROPERTY TargetWeight : LREAL]]></Declaration>
+      <Get Name="Get" Id="{9d4ff97e-aac8-4c2d-a408-907e92d83184}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{f6b322a7-bf17-44d9-8994-7f5035506b37}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

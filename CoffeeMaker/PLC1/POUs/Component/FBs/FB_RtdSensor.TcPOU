@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_RtdSensor" Id="{2e353b4b-b106-4727-b887-bf1f9517787d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RtdSensor EXTENDS FB_ComponentBase IMPLEMENTS I_TempSensor
+VAR
+	_InSimulation : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CyclicLogic" Id="{5c28ce19-f03b-4481-9569-2cafac0a0828}">
+      <Declaration><![CDATA[//{warning 'Add method implementation '}
+METHOD CyclicLogic
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _InSimulation THEN
+	CyclicSimulate();
+ELSE
+	;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CyclicSimulate" Id="{7e91be32-ae97-48c8-9110-6773dfddac1e}">
+      <Declaration><![CDATA[METHOD CyclicSimulate
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="InSimulation" Id="{0e42623d-33ad-439a-a09f-3e627d2ee02d}">
+      <Declaration><![CDATA[PROPERTY InSimulation : BOOL]]></Declaration>
+      <Get Name="Get" Id="{384af5e3-4117-41c7-840a-8b82036b671b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InSimulation := _InSimulation;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{537e02dd-67b1-4c08-9868-c907bb468574}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_InSimulation := InSimulation;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Reset" Id="{66ed542f-4215-4de9-a84c-fbc1d2ef08b8}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Reset : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Temp" Id="{15551044-a344-41f3-86cc-c8cdf380c97d}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY Temp : LREAL
+]]></Declaration>
+      <Get Name="Get" Id="{4f7d9504-81a8-4ef7-9285-a686f0e15403}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

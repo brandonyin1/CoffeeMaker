@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Scale" Id="{de0ee560-1e0d-444d-b634-c8840355f512}">
+    <Declaration><![CDATA[INTERFACE I_Scale EXTENDS I_ComponentBase
+]]></Declaration>
+    <Method Name="Tare" Id="{fefcbd18-ee4a-4b17-b26b-df8fcd989e3f}">
+      <Declaration><![CDATA[METHOD Tare
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Weight" Id="{cba467ec-8158-4207-8c07-1c9895c7e902}">
+      <Declaration><![CDATA[PROPERTY Weight : LREAL]]></Declaration>
+      <Get Name="Get" Id="{7d66297f-b009-4e67-87dd-187675222ea3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{ee9c65e6-2f59-4a16-82c3-35f67a947dec}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

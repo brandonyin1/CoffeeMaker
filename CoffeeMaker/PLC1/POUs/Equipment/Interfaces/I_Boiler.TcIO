@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Boiler" Id="{7bb3dcbf-7e58-4bf7-852e-ce99eb60453d}">
+    <Declaration><![CDATA[INTERFACE I_Boiler EXTENDS I_PackML_BaseModule
+]]></Declaration>
+    <Method Name="Disable" Id="{e58ee186-b71b-46a8-9c8d-ce2eed3e4821}">
+      <Declaration><![CDATA[METHOD Disable : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Enable" Id="{729781f5-7167-4206-8c93-370930ef25f7}">
+      <Declaration><![CDATA[METHOD Enable : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Heating" Id="{900b263f-bcf5-47e6-b12a-38a87e275572}">
+      <Declaration><![CDATA[PROPERTY Heating : BOOL]]></Declaration>
+      <Get Name="Get" Id="{b2ae9663-e722-4a55-a432-8d411f44370b}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="SetpointMet" Id="{0419e36f-9dbe-4be9-9c07-37d931d526dc}">
+      <Declaration><![CDATA[PROPERTY SetpointMet : BOOL]]></Declaration>
+      <Get Name="Get" Id="{127359cf-0f02-47cf-9e7d-12d731e5a93f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="TemperatureSetpoint" Id="{03ce042e-5e11-425c-9a9e-49213f5c14ff}">
+      <Declaration><![CDATA[PROPERTY TemperatureSetpoint : LREAL]]></Declaration>
+      <Get Name="Get" Id="{6e1dcc65-891d-45ef-a042-548d9db4cf0e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{8ec04ad5-ddc1-47bd-beb3-7dc72b1e4125}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

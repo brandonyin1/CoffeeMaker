@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{5476d895-76ae-435d-9782-f6b13de03fcd}">
+  <POU Name="MAIN" Id="{5476d895-76ae-435d-9782-f6b13de03fcd}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	CoffeeMaker : FB_Machine;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[CoffeeMaker.CyclicLogic();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
