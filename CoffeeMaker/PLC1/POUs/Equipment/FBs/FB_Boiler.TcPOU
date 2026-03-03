@@ -4,71 +4,60 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Boiler EXTENDS FB_PackML_BaseModule IMPLEMENTS I_Boiler
 VAR
 	// Interfaces
-	HeatingElement 	:	I_HeatingElement;
-	TempSensor 		: 	I_TempSensor;
+	ipHeatingElement 	:	I_HeatingElement;
+	ipTempSensor 		: 	I_TempSensor;
 	
 	// FBs
-	ImmersionHeater	: FB_ImmersionHeater;
-	RtdSensor		: FB_RtdSensor;
+	Sim_Heater 					: FB_SimulatedHeater;
+	Sim_TempSensor 				: FB_SimulatedTempSensor;
+	
+	// Local Variables
+	_TemperatureSetpoint	: LREAL;
+	_Heating				: BOOL;
+	_SimulateComponents: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="ChangeMode" Id="{43448d4d-2522-40a1-b71d-e0027a42f791}">
-      <Declaration><![CDATA[{warning 'Add method implementation '}
-METHOD ChangeMode
-VAR_INPUT
-	Mode	: SPT_BaseTypes.E_PMLUnitMode;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ChangeState" Id="{c2f27d80-047c-4c0d-a46a-7f96c8ba00ca}">
-      <Declaration><![CDATA[{warning 'Add method implementation '}
-METHOD ChangeState
-VAR_INPUT
-	State	: SPT_BaseTypes.E_PMLCommand;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Property Name="CurrentMode" Id="{12b4bdf5-2bd2-44ff-8e69-acd9a364bec8}">
-      <Declaration><![CDATA[{error 'Add property implementation or delete property to use base implementation'}
-PROPERTY CurrentMode : SPT_BaseTypes.E_PMLUnitMode
-]]></Declaration>
-      <Get Name="Get" Id="{a3313aba-bf57-4182-9b2e-2f32aeb3af71}">
+    <Property Name="CurrentTemp" Id="{db351b7c-035a-4942-ab59-70a6cc37df24}">
+      <Declaration><![CDATA[PROPERTY CurrentTemp : LREAL]]></Declaration>
+      <Get Name="Get" Id="{40696634-8714-4025-a9f1-f0fc293b5eb6}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="CurrentState" Id="{5bde3a48-65c8-4f8e-9bde-c9a29d4aa4ef}">
-      <Declaration><![CDATA[{error 'Add property implementation or delete property to use base implementation'}
-PROPERTY CurrentState : SPT_BaseTypes.E_PMLState
-]]></Declaration>
-      <Get Name="Get" Id="{a529a9de-a819-4ce5-b384-24a15b580026}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[IF ipTempSensor <> 0 THEN
+	CurrentTemp := ipTempSensor.Temp;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
     <Method Name="CyclicLogic" Id="{5091d7f9-b204-46ec-936d-18b529bb496d}">
-      <Declaration><![CDATA[{warning 'Add method implementation '}
+      <Declaration><![CDATA[//{warning 'Add method implementation '}
 METHOD CyclicLogic
+VAR
+END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF _SimulateComponents THEN
+	ipHeatingElement := Sim_Heater;
+	ipTempSensor := Sim_TempSensor;
+	ipTempSensor.SimulatedHeatingElement := ipHeatingElement;
+END_IF
+
+IF ipTempSensor <> 0 AND ipHeatingElement <> 0 THEN
+	IF ipTempSensor.Temp < _TemperatureSetpoint THEN
+		ipHeatingElement.PowerOn();
+		_Heating := TRUE;
+	ELSE
+		ipHeatingElement.PowerOff();
+		_Heating := FALSE;
+	END_IF
+	
+	ipTempSensor.CyclicLogic();
+	ipHeatingElement.CyclicLogic();
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="Disable" Id="{f60e66fc-af66-444e-adf7-cb5c9addbc75}">
@@ -87,6 +76,18 @@ METHOD Enable : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Heating" Id="{18430da4-247c-4dc2-b3d6-d4cab408d20e}">
+      <Declaration><![CDATA[PROPERTY Heating : BOOL]]></Declaration>
+      <Get Name="Get" Id="{31816ab3-92e3-4a00-a4a8-55583b54bc7c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Heating := _Heating;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="SetpointMet" Id="{ab534255-e398-44fe-ac3f-14ee4188a5b0}">
       <Declaration><![CDATA[{warning 'Add property implementation'}
 PROPERTY SetpointMet : BOOL
@@ -99,6 +100,26 @@ END_VAR
           <ST><![CDATA[]]></ST>
         </Implementation>
       </Get>
+    </Property>
+    <Property Name="SimulateComponents" Id="{1a92ceb2-72ac-4d85-bfb7-6c3a863a35b0}">
+      <Declaration><![CDATA[PROPERTY SimulateComponents : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c72b9250-f358-40bb-951c-d11a8a2bd16a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SimulateComponents := _SimulateComponents;
+]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{6ae34b39-3fba-45b4-bdf7-cbc9dc5e80c5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_SimulateComponents := SimulateComponents;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
     <Property Name="TemperatureSetpoint" Id="{9c79338d-b453-42c1-a2fe-92ffdeaf30a0}">
       <Declaration><![CDATA[{warning 'Add property implementation'}

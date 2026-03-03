@@ -3,6 +3,12 @@
   <Itf Name="I_Boiler" Id="{7bb3dcbf-7e58-4bf7-852e-ce99eb60453d}">
     <Declaration><![CDATA[INTERFACE I_Boiler EXTENDS I_PackML_BaseModule
 ]]></Declaration>
+    <Property Name="CurrentTemp" Id="{48fcbdeb-806c-4fb1-8e1b-866cf1d3a5d0}">
+      <Declaration><![CDATA[PROPERTY CurrentTemp : LREAL]]></Declaration>
+      <Get Name="Get" Id="{75781800-b36f-4928-bd5b-c55c24da3604}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Method Name="Disable" Id="{e58ee186-b71b-46a8-9c8d-ce2eed3e4821}">
       <Declaration><![CDATA[METHOD Disable : BOOL
 VAR_INPUT

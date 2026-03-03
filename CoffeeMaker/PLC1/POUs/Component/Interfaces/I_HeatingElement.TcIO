@@ -3,14 +3,20 @@
   <Itf Name="I_HeatingElement" Id="{38dcd78f-e4ad-41ec-b17e-8151452404c0}">
     <Declaration><![CDATA[INTERFACE I_HeatingElement EXTENDS I_ComponentBase
 ]]></Declaration>
-    <Method Name="Off" Id="{aa1b184d-5420-4f86-a1e4-c0d3db7f4e1c}">
-      <Declaration><![CDATA[METHOD Off : BOOL
+    <Property Name="Power" Id="{aa955202-bcc7-49e6-be3e-6b2adf5c56b5}">
+      <Declaration><![CDATA[PROPERTY Power : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c05e11db-a7b4-4d98-ad2a-a83f8c7d438e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="PowerOff" Id="{aa1b184d-5420-4f86-a1e4-c0d3db7f4e1c}">
+      <Declaration><![CDATA[METHOD PowerOff : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="On" Id="{ab7f4888-a4bc-4974-9946-472316fcea99}">
-      <Declaration><![CDATA[METHOD On : BOOL
+    <Method Name="PowerOn" Id="{ab7f4888-a4bc-4974-9946-472316fcea99}">
+      <Declaration><![CDATA[METHOD PowerOn : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>

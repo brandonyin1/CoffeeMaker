@@ -4,8 +4,8 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Dispenser EXTENDS FB_PackML_BaseModule IMPLEMENTS I_Dispenser
 VAR
 	// Interfaces
-	Pump	:	I_Pump;
-	Scale	:	I_Scale;
+	ipPump	:	I_Pump;
+	ipScale	:	I_Scale;
 	
 	// FBs
 	DcPump		: FB_DcPump;

@@ -10,67 +10,6 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="ChangeMode" Id="{81631c5e-4939-4f96-953e-e99c88d32cc0}">
-      <Declaration><![CDATA[{warning 'Add method implementation '}
-METHOD ChangeMode
-VAR_INPUT
-	Mode	: SPT_BaseTypes.E_PMLUnitMode;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="ChangeState" Id="{3f2c94fe-6c79-416a-a6c7-76843a7ae105}">
-      <Declaration><![CDATA[{warning 'Add method implementation '}
-METHOD ChangeState
-VAR_INPUT
-	State	: SPT_BaseTypes.E_PMLCommand;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
-    <Property Name="CurrentAlarmSeverity" Id="{50a9afe9-81c4-44b2-a8e4-9ee4e186868b}">
-      <Declaration><![CDATA[{error 'Add property implementation or delete property to use base implementation'}
-PROPERTY CurrentAlarmSeverity : SPT_BaseTypes.TcEventSeverity
-]]></Declaration>
-      <Get Name="Get" Id="{b77bc0c9-b905-4db6-a6bd-2875e0bb70d3}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="CurrentMode" Id="{cdc43974-b2dd-4265-96c0-b77fd9af99ef}">
-      <Declaration><![CDATA[{error 'Add property implementation or delete property to use base implementation'}
-PROPERTY CurrentMode : SPT_BaseTypes.E_PMLUnitMode
-]]></Declaration>
-      <Get Name="Get" Id="{9d2df6d4-e94a-470f-95a6-8bbff4845c6c}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="CurrentState" Id="{ee32b35c-82a9-42f2-8d73-c7ac43561ac3}">
-      <Declaration><![CDATA[{error 'Add property implementation or delete property to use base implementation'}
-PROPERTY CurrentState : SPT_BaseTypes.E_PMLState
-]]></Declaration>
-      <Get Name="Get" Id="{37204a56-1ddc-4e75-80e6-f15180b608db}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="CyclicLogic" Id="{041eac44-05ea-481d-bf59-fdcc1dd5374b}">
       <Declaration><![CDATA[{warning 'Add method implementation '}
 METHOD CyclicLogic

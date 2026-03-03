@@ -3,11 +3,22 @@
   <POU Name="MAIN" Id="{5476d895-76ae-435d-9782-f6b13de03fcd}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	CoffeeMaker : FB_Machine;
+	bFirstCycle : BOOL := TRUE;
+	Boiler : FB_Boiler;
+	
+	TempChange : LREAL;
+	lastTemp : LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[CoffeeMaker.CyclicLogic();]]></ST>
+      <ST><![CDATA[IF bFirstCycle THEN
+	Boiler.SimulateComponents := TRUE;
+END_IF
+
+Boiler.CyclicLogic();
+
+TempChange := Boiler.CurrentTemp - lastTemp;
+lastTemp := Boiler.CurrentTemp;]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

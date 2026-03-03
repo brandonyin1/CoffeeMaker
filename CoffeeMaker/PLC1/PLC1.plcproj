@@ -22,16 +22,10 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Component\FBs\FB_ImmersionHeater.TcPOU">
+    <Compile Include="POUs\Component\FBs\FB_SimulatedHeater.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Component\FBs\FB_DcPump.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Component\FBs\FB_SerialScale.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Component\FBs\FB_RtdSensor.TcPOU">
+    <Compile Include="POUs\Component\FBs\FB_SimulatedTempSensor.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Component\Interfaces\I_HeatingElement.TcIO">

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SimulatedTempSensor" Id="{cd48cc99-3f14-419b-aefa-52a9a041945c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimulatedTempSensor EXTENDS FB_ComponentBase IMPLEMENTS I_TempSensor
+VAR
+	_SimulatedHeatingElement: I_HeatingElement;
+	_Temp: LREAL := 20;
+	
+	T_h : LREAL := 20;
+	T_w : LREAL := 20;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CyclicLogic" Id="{2f8062f2-f056-4eac-850e-993fe1f5becc}">
+      <Declaration><![CDATA[//{warning 'Add method implementation '}
+METHOD CyclicLogic
+VAR
+	P_elec			: LREAL;			// Electric power for the heater (W)
+	k_hw			: LREAL := 150;		// Heater --> Water coupling (W/deg C)
+	h_h				: LREAL := 2;		// Heater --> air loss (W/deg C)
+	T_ambient		: LREAL := 20;		// Room temperature (deg C)
+	m_h				: LREAL := 0.22;	// Mass of the heater (kg)
+	c_h				: LREAL := 500;		// Specific heat of heater (J/kg)
+	delta_t 		: LREAL := 0.25;		// Change in time per cycle (s)
+	h_w				: LREAL := 8;		// Water --> air loss (W/deg C)
+	m_w				: LREAL := 0.75;		// Mass of the water (kg)
+	c_w				: LREAL := 4180;	// Specific heat of water (J/kg)
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _SimulatedHeatingElement <> 0 THEN
+	// Electrical Input
+	IF _SimulatedHeatingElement.Power THEN
+		P_elec := 1000;
+	ELSE
+		P_elec := 0;
+	END_IF
+	
+	// Heater Dynamics
+	T_h := T_h + ((P_elec - k_hw * (T_h - T_w) - h_h * (T_h - T_ambient)) / (m_h * c_h)) * delta_t;
+	// Water Dynamics
+	T_w := T_w + ((k_hw * (T_h -T_w) - h_w * (T_w - T_ambient)) / (m_w * c_w)) *delta_t;
+	IF T_w > 100 THEN
+		T_w := 100;
+	END_IF
+	
+	_Temp := T_w;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SimulatedHeatingElement" Id="{997a7bc8-a06c-4410-8441-22fc4feeb9b8}">
+      <Declaration><![CDATA[PROPERTY SimulatedHeatingElement : I_HeatingElement
+]]></Declaration>
+      <Get Name="Get" Id="{aa2f3d88-68a0-4733-b647-0da5ae19cdb5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SimulatedHeatingElement := _SimulatedHeatingElement;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{0ecfcdb9-d488-44b6-996f-4fd2fd94a3f2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_SimulatedHeatingElement := SimulatedHeatingElement;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Temp" Id="{1c732188-ab85-47a1-9e7e-9be03453dda7}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY Temp : LREAL
+]]></Declaration>
+      <Get Name="Get" Id="{575ef6f5-45a6-46e9-bbf9-a85163347da2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Temp := _Temp;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
