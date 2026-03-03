@@ -19,7 +19,6 @@ Boiler.CyclicLogic();
 
 TempChange := Boiler.CurrentTemp - lastTemp;
 lastTemp := Boiler.CurrentTemp;
-;
 ]]></ST>
     </Implementation>
   </POU>
