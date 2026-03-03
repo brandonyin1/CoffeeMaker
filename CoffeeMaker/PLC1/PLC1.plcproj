@@ -25,6 +25,9 @@
     <Compile Include="POUs\Component\FBs\FB_SimulatedHeater.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Component\FBs\FB_SimulatedPump.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Component\FBs\FB_SimulatedTempSensor.TcPOU">
       <SubType>Code</SubType>
     </Compile>

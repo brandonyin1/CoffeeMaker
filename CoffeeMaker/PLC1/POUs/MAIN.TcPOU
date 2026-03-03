@@ -8,7 +8,6 @@ VAR
 	
 	TempChange : LREAL;
 	lastTemp : LREAL;
-	NewVar: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -20,9 +19,7 @@ Boiler.CyclicLogic();
 
 TempChange := Boiler.CurrentTemp - lastTemp;
 lastTemp := Boiler.CurrentTemp;
-
-// Hello laptop!
-NewVar := TRUE;
+;
 ]]></ST>
     </Implementation>
   </POU>
