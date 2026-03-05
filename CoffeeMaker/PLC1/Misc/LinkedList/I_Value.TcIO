@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Value" Id="{11eb2c2c-756a-4a5b-9fbd-9cf867ad8056}">
+    <Declaration><![CDATA[INTERFACE I_Value
+]]></Declaration>
+  </Itf>
+</TcPlcObject>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="LinkedList" Id="{f77d0c68-9950-49a3-88f1-6cfea9058813}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LinkedList
+VAR
+	pHead  : POINTER TO Node;
+	pTail  : POINTER TO Node;
+	Count : INT := 0; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="addNode" Id="{aba60537-538f-4270-b7d3-85bf170f1718}">
+      <Declaration><![CDATA[METHOD addNode
+VAR_INPUT
+	data : INT;
+END_VAR
+VAR
+	temp : POINTER TO Node;
+	
+	pNode : POINTER TO Node;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[
+IF pHead = 0 THEN
+	// List is currently empty, assign new node to head
+	pHead := pNode;
+	pTail := pNode;
+ELSE
+	temp := pTail;
+	pTail := pNode;
+	pNode^.pPrev := temp;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_Init" Id="{ed006d78-fbde-4343-a1ce-6638fd1d2778}">
+      <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
+//The return value is not evaluated. For a specific influence, you can also declare the
+//methods explicitly and provide additional code there with the standard initialization
+//code. You can evaluate the return value.
+METHOD FB_Init: BOOL
+VAR_INPUT
+    bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
+    bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pHead := pTail := 0;
+Count := 0;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

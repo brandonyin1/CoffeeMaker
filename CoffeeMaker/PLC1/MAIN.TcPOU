@@ -3,22 +3,22 @@
   <POU Name="MAIN" Id="{5476d895-76ae-435d-9782-f6b13de03fcd}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	bFirstCycle : BOOL := TRUE;
-	Boiler : FB_Boiler;
+	pNewNode : POINTER TO Node;
 	
-	TempChange : LREAL;
-	lastTemp : LREAL;
+	bCreate : BOOL := FALSE;
+	bDelete: BOOL := FALSE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bFirstCycle THEN
-	Boiler.SimulateComponents := TRUE;
+      <ST><![CDATA[IF bCreate AND pNewNode = 0 THEN
+	pNewNode := __NEW(Node, 1);
+	bCreate := FALSE;
+END_IF;
+
+IF bDelete THEN
+	__DELETE(pNewNode);
+	bDelete := FALSE;
 END_IF
-
-Boiler.CyclicLogic();
-
-TempChange := Boiler.CurrentTemp - lastTemp;
-lastTemp := Boiler.CurrentTemp;
 ]]></ST>
     </Implementation>
   </POU>

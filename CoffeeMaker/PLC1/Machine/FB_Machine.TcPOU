@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Machine EXTENDS FB_PackML_BaseModule
 VAR
 	Boiler		: 	I_Boiler;
-	Dispenser	: I_Dispenser;
+	Dispenser	: 	I_Dispenser;
 END_VAR
 ]]></Declaration>
     <Implementation>

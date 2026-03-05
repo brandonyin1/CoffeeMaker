@@ -4,17 +4,17 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Boiler EXTENDS FB_PackML_BaseModule IMPLEMENTS I_Boiler
 VAR
 	// Interfaces
-	ipHeatingElement 	:	I_HeatingElement;
-	ipTempSensor 		: 	I_TempSensor;
+	ipHeatingElement 		:	I_HeatingElement;
+	ipTempSensor 			: 	I_TempSensor;
 	
 	// FBs
-	Sim_Heater 					: FB_SimulatedHeater;
-	Sim_TempSensor 				: FB_SimulatedTempSensor;
+	Sim_Heater 					:	FB_SimulatedHeater;
+	Sim_TempSensor 				: 	FB_SimulatedTempSensor;
 	
 	// Local Variables
-	_TemperatureSetpoint	: LREAL;
-	_Heating				: BOOL;
-	_SimulateComponents: BOOL;
+	_TemperatureSetpoint	: 	LREAL;
+	_Heating				: 	BOOL;
+	_SimulateComponents		: 	BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -54,7 +54,6 @@ IF ipTempSensor <> 0 AND ipHeatingElement <> 0 THEN
 		ipHeatingElement.PowerOff();
 		_Heating := FALSE;
 	END_IF
-	
 	ipTempSensor.CyclicLogic();
 	ipHeatingElement.CyclicLogic();
 END_IF]]></ST>
