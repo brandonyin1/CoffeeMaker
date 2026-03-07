@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_LinkedList" Id="{f77d0c68-9950-49a3-88f1-6cfea9058813}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_LinkedList
+VAR
+	pHead  : POINTER TO ST_Node;
+	pTail  : POINTER TO ST_Node;
+	Count  : UINT := 0; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="addValue" Id="{aba60537-538f-4270-b7d3-85bf170f1718}">
+      <Declaration><![CDATA[METHOD addValue
+VAR_INPUT
+	data : T_Generic;
+END_VAR
+VAR
+	pTemp : POINTER TO ST_Node;
+	pNode : POINTER TO ST_Node;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Create a new node
+pNode := __NEW(ST_Node, 1);
+IF pNode <> 0 THEN
+	// Give new node the input data
+	pNode^.data := data;
+	IF pHead = 0 THEN
+		// List is currently empty, assign new node to head
+		pHead := pNode;
+		pTail := pNode;
+	ELSE
+		pTemp := pTail;
+		pTail := pNode;
+		pNode^.pNext := pTail;
+		pTail^.pPrev :=pTemp;
+	END_IF
+	count := count + 1;
+ELSE
+	RETURN;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_Exit" Id="{b109fb3d-36b0-45cc-b8c7-f2edfe410940}">
+      <Declaration><![CDATA[//FB_Exit must be implemented explicitly. If there is an implementation, then the
+//method is called before the controller removes the code of the function block instance
+//(implicit call). The return value is not evaluated.
+METHOD FB_Exit: BOOL
+VAR_INPUT
+    bInCopyCode: BOOL;  // TRUE: the exit method is called in order to leave the instance which will be copied afterwards (online change).  
+
+END_VAR
+VAR
+	i : UINT;
+	pNext : POINTER TO ST_Node;
+	pNode : POINTER TO ST_Node;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Length <> 0 THEN
+	pNode := pHead;
+	FOR i := 0 TO Count-1 DO
+		pNext := pNode^.pNext;
+		pNode^.pNext := 0;
+		pNode^.pPrev := 0;
+		__DELETE(pNode);
+		pNode := pNext;
+	END_FOR
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_Init" Id="{ed006d78-fbde-4343-a1ce-6638fd1d2778}">
+      <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
+//The return value is not evaluated. For a specific influence, you can also declare the
+//methods explicitly and provide additional code there with the standard initialization
+//code. You can evaluate the return value.
+METHOD FB_Init: BOOL
+VAR_INPUT
+    bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
+    bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pHead := pTail := 0;
+Count := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="getValue" Id="{0812e3af-6c97-4c8b-881c-89cce7af4ba1}">
+      <Declaration><![CDATA[METHOD getValue : T_Generic
+VAR_INPUT
+	index : INT;
+END_VAR
+
+VAR
+	pNode : POINTER TO ST_Node;
+	i: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pNode := pHead;
+IF index >= 0 AND index < Count AND pNode <> 0 THEN 
+	FOR i := 0 TO Count - 1 DO
+		IF i = index THEN
+			getValue := pNode^.data;
+			EXIT;
+		END_IF
+	END_FOR
+ELSE
+	RETURN;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="isEmpty" Id="{22b5959e-11e8-4d21-a580-684d18a735d9}">
+      <Declaration><![CDATA[METHOD isEmpty : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[isEmpty := Count = 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Length" Id="{9402d8b9-eb02-45f9-8f0d-b9c467df6e79}">
+      <Declaration><![CDATA[PROPERTY Length : UINT]]></Declaration>
+      <Get Name="Get" Id="{40ec9ca1-8135-46ee-bf7d-20931eabee50}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Length := count;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
