@@ -17,11 +17,6 @@
     <Implicit_KindOfTask>{abc9d233-9ded-4cb7-aa8b-75dbb9c62e34}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{68a5d6b6-48ff-4d1c-8f9f-9ad4b448c57e}</Implicit_Jitter_Distribution>
     <LibraryReferences>{f67efe01-c1f3-483d-8870-d0740a6b5189}</LibraryReferences>
-    <Released>false</Released>
-    <VirtualLibrary>true</VirtualLibrary>
-    <Company>Brandon</Company>
-    <Title>CoffeeMaker</Title>
-    <ProjectVersion>0.1</ProjectVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component\FBs\FB_SimulatedHeater.TcPOU">
@@ -66,13 +61,16 @@
     <Compile Include="MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Misc\LinkedList\FB_LinkedList.TcPOU">
+    <Compile Include="Misc\LinkedList\I_Node.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Misc\LinkedList\ST_Node.TcDUT">
+    <Compile Include="Misc\LinkedList\I_Value.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Misc\LinkedList\T_Generic.TcDUT">
+    <Compile Include="Misc\LinkedList\LinkedList.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Misc\LinkedList\Node.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
