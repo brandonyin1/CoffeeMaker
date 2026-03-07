@@ -3,97 +3,36 @@
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4d4068ed-44d8-4f09-89d3-226a4640b923}</ProjectGuid>
+    <ProjectGuid>{767907db-7754-4744-8b62-4d80731ff368}</ProjectGuid>
     <SubObjectsSortedByName>true</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>PLC1</Name>
+    <Name>UnitTests</Name>
     <ProgramVersion>3.1.4026.20</ProgramVersion>
     <WriteBookmarksToFile>true</WriteBookmarksToFile>
-    <Application>{2b8df6f5-9d67-4c77-8e9e-7a3e84c595b5}</Application>
-    <TypeSystem>{4ec05748-7176-42bc-9133-874dfd5cfee1}</TypeSystem>
-    <Implicit_Task_Info>{b503e50c-d5a9-41a1-83cd-5e53c4637a04}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{abc9d233-9ded-4cb7-aa8b-75dbb9c62e34}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{68a5d6b6-48ff-4d1c-8f9f-9ad4b448c57e}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{f67efe01-c1f3-483d-8870-d0740a6b5189}</LibraryReferences>
-    <Released>false</Released>
-    <VirtualLibrary>true</VirtualLibrary>
-    <Company>Brandon</Company>
-    <Title>CoffeeMaker</Title>
-    <ProjectVersion>0.1</ProjectVersion>
+    <Application>{647cd316-d051-4a6a-bd0d-077056215703}</Application>
+    <TypeSystem>{a1be6b61-8897-4842-b85f-f29334cc8c82}</TypeSystem>
+    <Implicit_Task_Info>{5e232ef0-f4d0-4015-ae99-f81b8694ad0c}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{3b259ca2-b842-468d-b0bd-6bdff44d08e7}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{307c2269-e0b3-476a-b518-6e9fdfce0342}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{3f01a694-6385-4dd0-9063-c29c8d5c5bf9}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Component\FBs\FB_SimulatedHeater.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Component\FBs\FB_SimulatedPump.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Component\FBs\FB_SimulatedScale.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Component\FBs\FB_SimulatedTempSensor.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Component\Interfaces\I_HeatingElement.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Component\Interfaces\I_Pump.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Component\Interfaces\I_Scale.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Component\Interfaces\I_TempSensor.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Equipment\FBs\FB_Boiler.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Equipment\FBs\FB_Dispenser.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Equipment\Interfaces\I_Boiler.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Equipment\Interfaces\I_Dispenser.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Machine\FB_Machine.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Misc\LinkedList\FB_LinkedList.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Misc\LinkedList\ST_Node.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Misc\LinkedList\T_Generic.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\FB_LinkedList_Test.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test\PRG_TEST.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Component" />
-    <Folder Include="Component\FBs" />
-    <Folder Include="Component\Interfaces" />
-    <Folder Include="Equipment" />
-    <Folder Include="Equipment\FBs" />
-    <Folder Include="Equipment\Interfaces" />
-    <Folder Include="Machine" />
-    <Folder Include="Misc" />
-    <Folder Include="Misc\LinkedList" />
-  </ItemGroup>
-  <ItemGroup>
-    <PlaceholderReference Include="SPT Base Types">
-      <DefaultResolution>SPT Base Types, * (Beckhoff Automation LLC)</DefaultResolution>
-      <Namespace>SPT_BaseTypes</Namespace>
+    <PlaceholderReference Include="CoffeeMaker">
+      <DefaultResolution>[CoffeeMaker], * (Brandon)</DefaultResolution>
+      <Namespace>CoffeeMaker</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -108,9 +47,16 @@
       <Namespace>Tc3_Module</Namespace>
       <SystemLibrary>true</SystemLibrary>
     </PlaceholderReference>
+    <PlaceholderReference Include="TcUnit">
+      <DefaultResolution>TcUnit, * (www.tcunit.org)</DefaultResolution>
+      <Namespace>TcUnit</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PLC1.tmc">
+    <Folder Include="Test" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UnitTests.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SimulatedPump" Id="{be317f72-b581-4b21-abf7-8ef72808cd18}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimulatedPump EXTENDS FB_ComponentBase IMPLEMENTS I_Pump
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CyclicLogic" Id="{0714ccf9-99b3-4d76-bd27-1f6e735a0fba}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD CyclicLogic
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Speed" Id="{ed4b2892-e48c-40a5-9f09-396963c2d4bf}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY Speed : LREAL
+]]></Declaration>
+      <Get Name="Get" Id="{5da42a9b-3caa-479a-bbc2-6ba02383d132}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c134a5e9-7506-45c1-8311-f133b1759a3f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Start" Id="{f9ac44a6-3592-47b1-a865-0211ed52e8d7}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Start : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stop" Id="{a18011b8-543a-48c9-9242-affb8168b7ff}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Stop
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_SimulatedScale" Id="{4daf688a-6a4f-43ef-98c9-d12265253220}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimulatedScale EXTENDS FB_ComponentBase IMPLEMENTS I_Scale
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CyclicLogic" Id="{8eb76a38-87f9-4e72-b49b-7fc2f5b7cd9a}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD CyclicLogic
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Tare" Id="{bd2a2a9b-4af6-4061-af68-9126198b4727}">
+      <Declaration><![CDATA[{warning 'Add method implementation '}
+METHOD Tare
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Weight" Id="{1f8d0437-5694-4f7a-9da5-16a41e9d4959}">
+      <Declaration><![CDATA[{warning 'Add property implementation'}
+PROPERTY Weight : LREAL
+]]></Declaration>
+      <Get Name="Get" Id="{5b4e41ee-cdee-4f21-8763-6190b3e04481}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{6fbe45c1-3ab9-4af4-a5ed-2904847823fc}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

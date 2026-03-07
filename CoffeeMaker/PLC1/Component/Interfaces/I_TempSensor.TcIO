@@ -3,6 +3,15 @@
   <Itf Name="I_TempSensor" Id="{50c55809-fda1-447d-bc3e-8203634c9af0}">
     <Declaration><![CDATA[INTERFACE I_TempSensor EXTENDS I_ComponentBase
 ]]></Declaration>
+    <Property Name="SimulatedHeatingElement" Id="{1d486f18-5279-4230-9146-e7fa3cd5c9d1}">
+      <Declaration><![CDATA[PROPERTY SimulatedHeatingElement : I_HeatingElement]]></Declaration>
+      <Get Name="Get" Id="{11015281-fa0b-45e2-89b0-ec25227c39ca}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{12cb8d8b-8de6-4dde-aa46-d3a5d52aa0bf}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
     <Property Name="Temp" Id="{ce127390-c556-41bd-a4b2-3337fb4d92d9}">
       <Declaration><![CDATA[PROPERTY Temp : LREAL]]></Declaration>
       <Get Name="Get" Id="{80d78f06-89c8-4b0b-bd29-caf0d50c6508}">
