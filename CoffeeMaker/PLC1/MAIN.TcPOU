@@ -3,23 +3,10 @@
   <POU Name="MAIN" Id="{5476d895-76ae-435d-9782-f6b13de03fcd}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	pNewNode : POINTER TO Node;
-	
-	bCreate : BOOL := FALSE;
-	bDelete: BOOL := FALSE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bCreate AND pNewNode = 0 THEN
-	pNewNode := __NEW(Node, 1);
-	bCreate := FALSE;
-END_IF;
-
-IF bDelete THEN
-	__DELETE(pNewNode);
-	bDelete := FALSE;
-END_IF
-]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

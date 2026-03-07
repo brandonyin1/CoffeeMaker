@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_LinkedList_Test" Id="{3d9ebd70-657f-405b-b31e-010edd5810ad}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_LinkedList_Test EXTENDS FB_TestSuite
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[NewListHasLength0();]]></ST>
+    </Implementation>
+    <Method Name="AddFirstNode" Id="{02c4374d-54e1-4c6d-a171-b7c57fceb053}">
+      <Declaration><![CDATA[METHOD AddFirstNode
+VAR
+	fbLinkedList : FB_LinkedList;
+	
+	Actual1 : BOOL;
+	Actual2 : UINT;
+	Actual3 : INT;
+	
+	Expected1 : BOOL := TRUE;
+	Expected2 : UINT := 1;
+	Expected3 : INT := 1;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('AddFirstNode');
+
+fbLinkedList.addValue(1);
+
+Actual1 := fbLinkedList.isEmpty();
+AssertEquals(Expected := Expected1, Actual := Actual1, Message := 'isEmpty returns true after adding an item to the list');
+
+Actual2 := fbLinkedList.Length;
+AssertEquals(Expected := Expected2, Actual := Actual2, Message := 'Length is not equal to 1 after adding 1 node');
+
+Actual3 := fbLinkedList.getValue(0);
+AssertEquals(Expected := Expected3, Actual := Actual3, Message := 'getValue did not return the expected value');
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddMultipleNodesDifferentTypes" Id="{cd39a802-fd8b-4efc-aea3-df781ae0ac28}">
+      <Declaration><![CDATA[METHOD AddMultipleNodesDifferentTypes
+VAR
+	fbLinkedList: FB_LinkedList;
+	
+	intValue 		: INT 		:= 33;
+	realValue 		: REAL		:= 3.123;
+	stringValue 	: STRING 	:= 'Hello world!';
+	TYPE ST_Node :
+		STRUCT
+			data : T_Generic;
+			pNext : POINTER TO INT;
+			pPrev : POINTER TO INT;
+		END_STRUCT
+		END_TYPE
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('AddMultipleNodesSameType');
+
+FOR i := 0 TO 4 DO
+	fbLinkedList.addValue(intArray[i]);
+END_FOR
+
+AssertEquals(Expected := 5, Actual := fbLinkedList.Length, Message := 'Length not equal to 5 after adding 5 nodes');
+
+FOR i := 0 TO 4 DO 
+	AssertEquals(Expected := intArray[i], Actual := fbLinkedList.getValue(i), Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 
+END_FOR
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddMultipleNodesSameType" Id="{8224b165-2d73-4654-aee9-e1a98ae56ad8}">
+      <Declaration><![CDATA[METHOD AddMultipleNodesSameType
+VAR
+	fbLinkedList : FB_LinkedList;
+	intArray : ARRAY [0..4] OF INT := [1,2,3,4,5];
+	i : INT;
+	Actual: INT;
+	ActualArr: INT;
+	Expected: INT := 5;
+	ExpectedArr: INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('AddMultipleNodesSameType');
+
+FOR i := 0 TO 4 DO
+	fbLinkedList.addValue(intArray[i]);
+END_FOR
+
+Actual := fbLinkedList.Length;
+AssertEquals(Expected := Expected, Actual := Actual, Message := 'Length not equal to 5 after adding 5 nodes');
+
+FOR i := 0 TO 4 DO 
+	ActualArr := fbLinkedList.getValue(i);
+	ExpectedArr := intArray[i];
+	AssertEquals(Expected := ExpectedArr, Actual := ActualArr, Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 
+END_FOR
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="isEmptyReturnsTrueOnEmptyList" Id="{f9b33b21-fb22-40ad-9f99-3999b9a82141}">
+      <Declaration><![CDATA[METHOD isEmptyReturnsTrueOnEmptyList
+VAR
+	fbLinkedList : FB_LinkedList;
+	Expected : BOOL := TRUE;
+	Actual: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('isEmptyReturnsTrueOnEmptyList');
+
+Actual := fbLinkedList.isEmpty();
+
+AssertEquals(Expected := Expected,
+			 Actual := Actual,
+			 Message := 'isEmpty() evaluates false on new linked list');
+			 
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="NewListHasLength0" Id="{4603ff7b-7599-41c0-8254-71412deb3ba7}">
+      <Declaration><![CDATA[METHOD NewListHasLength0
+VAR
+	LinkedList : FB_LinkedList;
+	Result : UINT;
+	ExpectedLength : UINT := 0;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('NewListHasLength0');
+
+Result := LinkedList.Length;
+
+AssertEquals(Expected := ExpectedLength,
+			Actual := Result,
+			Message := 'New list is not empty');
+			
+			
+	
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
