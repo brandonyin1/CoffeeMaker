@@ -6,18 +6,27 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[NewListHasLength0();]]></ST>
+      <ST><![CDATA[NewListHasLength0();
+isEmptyReturnsTrueOnEmptyList();
+AddFirstNode();
+AddMultipleNodesSameType();
+AddMultipleNodesDifferentTypes();
+InsertAfterSuccessfully();
+RemoveNodeSuccessfully();]]></ST>
     </Implementation>
     <Method Name="AddFirstNode" Id="{02c4374d-54e1-4c6d-a171-b7c57fceb053}">
       <Declaration><![CDATA[METHOD AddFirstNode
 VAR
 	fbLinkedList : FB_LinkedList;
 	
+	value : INT := 1;
+	getValue : INT;
+	
 	Actual1 : BOOL;
 	Actual2 : UINT;
 	Actual3 : INT;
 	
-	Expected1 : BOOL := TRUE;
+	Expected1 : BOOL := FALSE;
 	Expected2 : UINT := 1;
 	Expected3 : INT := 1;
 END_VAR
@@ -25,7 +34,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('AddFirstNode');
 
-fbLinkedList.addValue(1);
+fbLinkedList.addValue(value);
 
 Actual1 := fbLinkedList.isEmpty();
 AssertEquals(Expected := Expected1, Actual := Actual1, Message := 'isEmpty returns true after adding an item to the list');
@@ -33,7 +42,8 @@ AssertEquals(Expected := Expected1, Actual := Actual1, Message := 'isEmpty retur
 Actual2 := fbLinkedList.Length;
 AssertEquals(Expected := Expected2, Actual := Actual2, Message := 'Length is not equal to 1 after adding 1 node');
 
-Actual3 := fbLinkedList.getValue(0);
+fbLinkedList.getValue(0,getValue);
+Actual3 := getValue;
 AssertEquals(Expected := Expected3, Actual := Actual3, Message := 'getValue did not return the expected value');
 
 TEST_FINISHED();
@@ -48,26 +58,32 @@ VAR
 	intValue 		: INT 		:= 33;
 	realValue 		: REAL		:= 3.123;
 	stringValue 	: STRING 	:= 'Hello world!';
-	TYPE ST_Node :
-		STRUCT
-			data : T_Generic;
-			pNext : POINTER TO INT;
-			pPrev : POINTER TO INT;
-		END_STRUCT
-		END_TYPE
+	
+	getInt : INT;
+	getReal : REAL;
+	getString : STRING;
+	
+	actualint : INT;
+	actualReal : REAL;
+	actualString : STRING;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('AddMultipleNodesSameType');
+        <ST><![CDATA[TEST('AddMultipleNodesDifferentTypes');
 
-FOR i := 0 TO 4 DO
-	fbLinkedList.addValue(intArray[i]);
-END_FOR
+fbLinkedList.addValue(intValue);
+fbLinkedList.addValue(realValue);
+fbLinkedList.addValue(stringValue);
 
-AssertEquals(Expected := 5, Actual := fbLinkedList.Length, Message := 'Length not equal to 5 after adding 5 nodes');
+fbLinkedList.getValue(0,getInt);
+actualInt :=  getInt;
+fbLinkedList.getValue(1, getReal);
+actualReal := getReal;
+fbLinkedList.getValue(2,getString);
+actualString := getString;
 
-FOR i := 0 TO 4 DO 
-	AssertEquals(Expected := intArray[i], Actual := fbLinkedList.getValue(i), Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 
-END_FOR
+AssertEquals_INT(expected := intValue, actual := actualInt, message := 'Position 0 was unexpected value');
+AssertEquals_REAL(expected := realValue, actual := actualReal, delta := 0.01, message := 'Position 1 was unexpected value');
+AssertEquals_STRING(expected := stringValue, actual := actualString, message := 'Position 2 was unexpceted value');
 
 TEST_FINISHED();]]></ST>
       </Implementation>
@@ -95,9 +111,44 @@ Actual := fbLinkedList.Length;
 AssertEquals(Expected := Expected, Actual := Actual, Message := 'Length not equal to 5 after adding 5 nodes');
 
 FOR i := 0 TO 4 DO 
-	ActualArr := fbLinkedList.getValue(i);
+	fbLinkedList.getValue(i, ActualArr);
 	ExpectedArr := intArray[i];
-	AssertEquals(Expected := ExpectedArr, Actual := ActualArr, Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 
+	AssertEquals(Expected := ExpectedArr, 
+				 Actual := ActualArr, 
+				 Message := CONCAT('Index ',CONCAT( INT_TO_STRING(i), CONCAT( ', expected ', CONCAT(INT_TO_STRING(ExpectedArr), CONCAT(', got ', INT_TO_STRING(ActualArr)))))));  
+END_FOR
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InsertAfterSuccessfully" Id="{b32a3f05-51de-4288-b235-a3ce606ef510}">
+      <Declaration><![CDATA[METHOD InsertAfterSuccessfully
+VAR
+	fbLinkedList : FB_LinkedList;
+	initArray : ARRAY [0..4] OF INT := [1,2,3,4,5];
+	i : INT;
+	
+	value : INT := 6;
+	
+	expectedArray : ARRAY [0..5] OF INT := [1,2,3,4,6,5];
+	
+	actual : INT;
+	expected : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('InsertAfterSuccessfully');
+
+FOR i := 0 TO 4 DO
+	fbLinkedList.addValue(initArray[i]);
+END_FOR
+
+fbLinkedList.insertAfter(value, 3);
+
+FOR i := 0 TO 4 DO 
+	fbLinkedList.getValue(i, actual);
+	expected := expectedArray[i];
+	AssertEquals(Expected := Expected, Actual := Actual, Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 
 END_FOR
 
 TEST_FINISHED();]]></ST>
@@ -141,6 +192,36 @@ AssertEquals(Expected := ExpectedLength,
 			
 			
 	
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RemoveNodeSuccessfully" Id="{c44f33bf-39e0-48c8-bc35-5b1c8068d79a}">
+      <Declaration><![CDATA[METHOD RemoveNodeSuccessfully
+VAR
+	fbLinkedList : FB_LinkedList;
+	initArray : ARRAY [0..4] OF INT := [1,2,3,4,5];
+	i : INT;
+	
+	expectedArray : ARRAY [0..3] OF INT := [1,2,4,5];
+	
+	actual : INT;
+	expected : INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('RemoveNodeSuccessfully');
+
+FOR i := 0 TO 4 DO
+	fbLinkedList.addValue(initArray[i]);
+END_FOR
+
+fbLinkedList.remove(2);
+
+FOR i := 0 TO 4 DO 
+	fbLinkedList.getValue(i, actual);
+	expected := expectedArray[i];
+	AssertEquals(Expected := Expected, Actual := Actual, Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 
+END_FOR
 
 TEST_FINISHED();]]></ST>
       </Implementation>

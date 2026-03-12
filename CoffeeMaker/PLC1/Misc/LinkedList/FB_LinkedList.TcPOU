@@ -14,7 +14,7 @@ END_VAR
     <Method Name="addValue" Id="{aba60537-538f-4270-b7d3-85bf170f1718}">
       <Declaration><![CDATA[METHOD addValue
 VAR_INPUT
-	data : T_Generic;
+	data : ANY;
 END_VAR
 VAR
 	pTemp : POINTER TO ST_Node;
@@ -31,11 +31,15 @@ IF pNode <> 0 THEN
 		// List is currently empty, assign new node to head
 		pHead := pNode;
 		pTail := pNode;
+	ELSIF Count = 1 THEN
+		pHead^.pNext := pNode;
+		pTail := pNode;
+		pTail^.pPrev := pHead;
 	ELSE
 		pTemp := pTail;
 		pTail := pNode;
-		pNode^.pNext := pTail;
 		pTail^.pPrev :=pTemp;
+		pTemp^.pNext := pTail;
 	END_IF
 	count := count + 1;
 ELSE
@@ -59,15 +63,24 @@ VAR
 	pNode : POINTER TO ST_Node;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Length <> 0 THEN
+        <ST><![CDATA[IF Count > 0 THEN
 	pNode := pHead;
-	FOR i := 0 TO Count-1 DO
-		pNext := pNode^.pNext;
+	
+	IF Count = 1 THEN
 		pNode^.pNext := 0;
 		pNode^.pPrev := 0;
 		__DELETE(pNode);
-		pNode := pNext;
-	END_FOR
+	ELSE
+		FOR i := 0 TO Count-1 DO
+			IF pNode <> pTail THEN
+				pNext := pNode^.pNext;
+			END_IF
+			pNode^.pNext := 0;
+			pNode^.pPrev := 0;
+			__DELETE(pNode);
+			pNode := pNext;
+		END_FOR
+	END_IF
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -88,9 +101,10 @@ Count := 0;]]></ST>
       </Implementation>
     </Method>
     <Method Name="getValue" Id="{0812e3af-6c97-4c8b-881c-89cce7af4ba1}">
-      <Declaration><![CDATA[METHOD getValue : T_Generic
+      <Declaration><![CDATA[METHOD getValue
 VAR_INPUT
 	index : INT;
+	value : ANY;
 END_VAR
 
 VAR
@@ -102,7 +116,7 @@ END_VAR]]></Declaration>
 IF index >= 0 AND index < Count AND pNode <> 0 THEN 
 	FOR i := 0 TO Count - 1 DO
 		IF i = index THEN
-			getValue := pNode^.data;
+			F_Copy_Generic(Source := pNode^.Data, Destination := Value);
 			EXIT;
 		END_IF
 	END_FOR
@@ -110,6 +124,17 @@ ELSE
 	RETURN;
 END_IF
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="insertAfter" Id="{bc2911b2-46b8-4fc0-b19f-fc210aa5fe8a}">
+      <Declaration><![CDATA[METHOD insertAfter : BOOL
+VAR_INPUT
+	value : ANY;
+	position : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="isEmpty" Id="{22b5959e-11e8-4d21-a580-684d18a735d9}">
@@ -132,5 +157,15 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="remove" Id="{f88a8e8b-e557-4cd5-a02f-b3251dcd82d7}">
+      <Declaration><![CDATA[METHOD remove : BOOL
+VAR_INPUT
+	index : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

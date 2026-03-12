@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="POU" Id="{8084c923-1e0d-4c15-abb7-f024be2b293f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION POU : BOOL
+VAR_INPUT
+	Source, Destination : REFERENCE TO T_Generic;
+END_VAR
+VAR
+	bSuccess : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT (__ISVALIDREF(Source) OR_ELSE __ISVALIDREF(Destination)) THEN
+	//F_Copy_Generic_Value := FALSE;
+	RETURN;
+END_IF
+
+bSuccess := MEMCPY(Destination.pValue, Source.pValue, TO_UDINT(MIN(Source.diSize, Destination.diSize))) > 0;
+//F_Copy_Generic_Value := bSuccess;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
