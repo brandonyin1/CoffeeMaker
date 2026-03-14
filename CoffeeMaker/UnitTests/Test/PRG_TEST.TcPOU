@@ -3,7 +3,11 @@
   <POU Name="PRG_TEST" Id="{7567f05d-f512-4125-af0d-5b2a293c9534}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PRG_TEST
 VAR
-	fbLinkedList_Test : FB_LinkedList_Test;
+	fbLinkedList_Test 		: FB_LinkedList_Test;
+	fbHeatingElement_Test 	: FB_HeatingElement_Test;
+	fbTempSensor_Test		: FB_TempSensor_Test;
+	fbScale_Test 			: FB_Scale_Test;
+	fbPump_Test				: FB_Pump_Test;
 END_VAR
 ]]></Declaration>
     <Implementation>

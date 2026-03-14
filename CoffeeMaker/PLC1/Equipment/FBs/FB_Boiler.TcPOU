@@ -3,18 +3,7 @@
   <POU Name="FB_Boiler" Id="{34b3672c-408e-44c2-8295-16ea1aa1e18a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Boiler EXTENDS FB_PackML_BaseModule IMPLEMENTS I_Boiler
 VAR
-	// Interfaces
-	ipHeatingElement 		:	I_HeatingElement;
-	ipTempSensor 			: 	I_TempSensor;
-	
-	// FBs
-	Sim_Heater 					:	FB_SimulatedHeater;
-	Sim_TempSensor 				: 	FB_SimulatedTempSensor;
-	
-	// Local Variables
-	_TemperatureSetpoint	: 	LREAL;
-	_Heating				: 	BOOL;
-	_SimulateComponents		: 	BOOL;
+
 END_VAR
 ]]></Declaration>
     <Implementation>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Pump_Test" Id="{cc7fddef-95ee-4c02-b194-8e9ba1f8e8b9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Pump_Test EXTENDS FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Initialize();
+EnableTriggersReadyState();
+SetFullOutput();
+SetZeroOutput();
+SetPartialOutput();
+DisableOverridesInput();
+ClampHighValues();
+ClampLowValues();
+AutoShutoff();]]></ST>
+    </Implementation>
+    <Method Name="AutoShutoff" Id="{8e297338-e8d4-4626-b306-496e53606749}">
+      <Declaration><![CDATA[METHOD AutoShutoff : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ClampHighValues" Id="{1e12cea2-fb37-4a81-a7ec-ad5ec57da3d7}">
+      <Declaration><![CDATA[METHOD ClampHighValues : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ClampLowValues" Id="{40ddc348-1ba2-4960-898f-41f6316e388f}">
+      <Declaration><![CDATA[METHOD ClampLowValues : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="DisableOverridesInput" Id="{5f1db090-b5b7-4034-9130-6e2ef726e213}">
+      <Declaration><![CDATA[METHOD DisableOverridesInput : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EnableTriggersReadyState" Id="{659fd9f9-b8b3-497e-93ca-0eafaac5aff0}">
+      <Declaration><![CDATA[METHOD EnableTriggersReadyState : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Initialize" Id="{f37e181c-663a-4cd9-91bb-5da750fbd14e}">
+      <Declaration><![CDATA[METHOD Initialize : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetFullOutput" Id="{3f4ac377-9258-4a3e-90d5-f61f7baf06c4}">
+      <Declaration><![CDATA[METHOD SetFullOutput : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetPartialOutput" Id="{b3e3f26c-55cd-4ed0-a1a1-cc9a648119ca}">
+      <Declaration><![CDATA[METHOD SetPartialOutput : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetZeroOutput" Id="{71a8634b-7d56-4624-b60b-e72447314567}">
+      <Declaration><![CDATA[METHOD SetZeroOutput : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

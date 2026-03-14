@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_TempSensor_Test" Id="{e8bb7e7a-3fea-489c-a564-220668290bd2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TempSensor_Test EXTENDS FB_TestSuite
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Initialization();
+ValidTemperatureReading();
+UpdateRefreshesTemparature();
+DetectOutOfRange();
+InvalidReadingDoesNotUpdateGoodValue();
+SensorRecoversFromFault();]]></ST>
+    </Implementation>
+    <Method Name="DetectOutOfRange" Id="{6d97aa0d-1b5a-4f8c-a699-883387b60166}">
+      <Declaration><![CDATA[METHOD DetectOutOfRange : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Initialization" Id="{38bb8039-0a63-42ae-9c6d-64297e97eb52}">
+      <Declaration><![CDATA[METHOD Initialization : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InvalidReadingDoesNotUpdateGoodValue" Id="{48ef7f18-f1a5-45d4-b62b-3b54d2e7d744}">
+      <Declaration><![CDATA[METHOD InvalidReadingDoesNotUpdateGoodValue : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SensorRecoversFromFault" Id="{705e107a-dc2a-47a4-b4a3-4b7e56a3c614}">
+      <Declaration><![CDATA[METHOD SensorRecoversFromFault : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateRefreshesTemparature" Id="{5220d095-55f8-42b1-b8ad-86a159e77a26}">
+      <Declaration><![CDATA[METHOD UpdateRefreshesTemparature : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ValidTemperatureReading" Id="{9c051db7-d449-4d7b-a34c-49c1aa8c48de}">
+      <Declaration><![CDATA[METHOD ValidTemperatureReading : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

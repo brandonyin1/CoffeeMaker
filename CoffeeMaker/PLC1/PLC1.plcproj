@@ -9,7 +9,7 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>PLC1</Name>
-    <ProgramVersion>3.1.4026.20</ProgramVersion>
+    <ProgramVersion>3.1.4026.21</ProgramVersion>
     <WriteBookmarksToFile>true</WriteBookmarksToFile>
     <Application>{2b8df6f5-9d67-4c77-8e9e-7a3e84c595b5}</Application>
     <TypeSystem>{4ec05748-7176-42bc-9133-874dfd5cfee1}</TypeSystem>
@@ -24,7 +24,7 @@
     <ProjectVersion>0.1</ProjectVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Component\FBs\FB_SimulatedHeater.TcPOU">
+    <Compile Include="Component\FBs\FB_HeatingElement.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Component\FBs\FB_SimulatedPump.TcPOU">
@@ -81,17 +81,22 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="_DUTs\ENUMs\E_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Component" />
     <Folder Include="Component\FBs" />
     <Folder Include="Component\Interfaces" />
+    <Folder Include="_DUTs\ENUMs" />
     <Folder Include="Equipment" />
     <Folder Include="Equipment\FBs" />
     <Folder Include="Equipment\Interfaces" />
     <Folder Include="Machine" />
     <Folder Include="Misc" />
     <Folder Include="Misc\LinkedList" />
+    <Folder Include="_DUTs" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="SPT Base Types">

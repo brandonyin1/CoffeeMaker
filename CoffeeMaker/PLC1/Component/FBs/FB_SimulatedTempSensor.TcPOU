@@ -33,7 +33,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF _SimulatedHeatingElement <> 0 THEN
 	// Electrical Input
-	P_elec := SEL(_SimulatedHeatingElement.Power, 0, 1000);
+	P_elec := SEL(_SimulatedHeatingElement.isHeating, 0, 1000);
 	// Heater Dynamics
 	T_h := T_h + ((P_elec - k_hw * (T_h - T_w) - h_h * (T_h - T_ambient)) / (m_h * c_h)) * delta_t;
 	// Water Dynamics

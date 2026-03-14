@@ -94,7 +94,7 @@ VAR
 	fbLinkedList : FB_LinkedList;
 	intArray : ARRAY [0..4] OF INT := [1,2,3,4,5];
 	i : INT;
-	Actual: INT;
+	Actual: UINT;
 	ActualArr: INT;
 	Expected: INT := 5;
 	ExpectedArr: INT;
@@ -174,6 +174,39 @@ AssertEquals(Expected := Expected,
 TEST_FINISHED();]]></ST>
       </Implementation>
     </Method>
+    <Method Name="MoveAfterSuccessfully" Id="{9469baaa-a0cd-4bfc-aa53-c26b3050afd3}">
+      <Declaration><![CDATA[METHOD MoveAfterSuccessfully
+VAR
+	fbLinkedList : FB_LinkedList;
+	initArray : ARRAY [0..4] OF INT := [1,2,3,4,5];
+	i : INT;
+	
+	value : INT := 6;
+	
+	expectedArray : ARRAY [0..4] OF INT := [1,2,4,3,5];
+	
+	actual : INT;
+	expected : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('MoveAfterSuccessfully');
+
+FOR i := 0 TO 4 DO
+	fbLinkedList.addValue(initArray[i]);
+END_FOR
+
+fbLinkedList.MoveAfter(2, 3);
+
+FOR i := 0 TO 4 DO 
+	fbLinkedList.getValue(i, actual);
+	expected := expectedArray[i];
+	AssertEquals(Expected := Expected, Actual := Actual, Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 
+END_FOR
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="NewListHasLength0" Id="{4603ff7b-7599-41c0-8254-71412deb3ba7}">
       <Declaration><![CDATA[METHOD NewListHasLength0
 VAR
@@ -194,6 +227,15 @@ AssertEquals(Expected := ExpectedLength,
 	
 
 TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OutputReflectsLevel" Id="{082ed4cc-88e8-4505-a710-00163d48ca38}">
+      <Declaration><![CDATA[METHOD OutputReflectsLevel : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="RemoveNodeSuccessfully" Id="{c44f33bf-39e0-48c8-bc35-5b1c8068d79a}">
@@ -217,7 +259,7 @@ END_FOR
 
 fbLinkedList.remove(2);
 
-FOR i := 0 TO 4 DO 
+FOR i := 0 TO 3 DO 
 	fbLinkedList.getValue(i, actual);
 	expected := expectedArray[i];
 	AssertEquals(Expected := Expected, Actual := Actual, Message := CONCAT('Index ', CONCAT(INT_TO_STRING(i), ' is not the expcted value'))); 

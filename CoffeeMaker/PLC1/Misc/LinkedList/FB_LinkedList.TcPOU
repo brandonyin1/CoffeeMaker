@@ -6,6 +6,8 @@ VAR
 	pHead  : POINTER TO ST_Node;
 	pTail  : POINTER TO ST_Node;
 	Count  : UINT := 0; 
+	
+	pLastAccessed : POINTER TO ST_Node;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -100,29 +102,48 @@ END_VAR
 Count := 0;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="getValue" Id="{0812e3af-6c97-4c8b-881c-89cce7af4ba1}">
-      <Declaration><![CDATA[METHOD getValue
+    <Method Name="getNode" Id="{051ebf0c-840a-40f9-bbeb-a87b1a9123b9}">
+      <Declaration><![CDATA[METHOD PRIVATE getNode : POINTER TO ST_Node
 VAR_INPUT
-	index : INT;
-	value : ANY;
+	index : UINT;
 END_VAR
 
 VAR
 	pNode : POINTER TO ST_Node;
-	i: INT;
+	i: UINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[pNode := pHead;
 IF index >= 0 AND index < Count AND pNode <> 0 THEN 
 	FOR i := 0 TO Count - 1 DO
 		IF i = index THEN
-			F_Copy_Generic(Source := pNode^.Data, Destination := Value);
-			EXIT;
+			getNode := pNode;
+			
+			RETURN;
 		END_IF
+		pNode := pNode^.pNext;
 	END_FOR
 ELSE
 	RETURN;
 END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="getValue" Id="{0812e3af-6c97-4c8b-881c-89cce7af4ba1}">
+      <Declaration><![CDATA[METHOD getValue
+VAR_INPUT
+	index : UINT;
+	value : ANY;
+END_VAR
+
+VAR
+	pNode : POINTER TO ST_Node;
+	i: UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pNode := getNode(index);
+F_Copy_Generic(Source := pNode^.Data, Destination := Value);
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -134,7 +155,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[addValue(value);
+moveAfter(count-1, position);]]></ST>
       </Implementation>
     </Method>
     <Method Name="isEmpty" Id="{22b5959e-11e8-4d21-a580-684d18a735d9}">
@@ -157,14 +179,85 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="MoveAfter" Id="{a047c1a4-9a9a-408c-9f50-d0ef9f249b4f}">
+      <Declaration><![CDATA[METHOD MoveAfter : BOOL
+VAR_INPUT
+	MoveIndex : UINT;
+	AfterIndex  : UINT;
+END_VAR
+VAR
+	pMove : POINTER TO ST_Node;
+	pAfter : POINTER TO ST_Node;
+	
+	pTemp : POINTER TO ST_Node;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pMove := getNode(MoveIndex);
+pAfter:= getNode(AfterIndex);
+
+// Check pointers are valid
+IF pMove = 0 OR pAfter = 0 THEN
+	RETURN;
+END_IF
+
+// No change needed
+IF pMove = pAfter OR pAfter^.pNext = pMove THEN
+	RETURN;
+END_IF
+
+
+// detach pMove
+IF pMove^.pPrev <> 0 THEN
+	pTemp := pMove^.pPrev;
+	pTemp^.pNext := pMove^.pNext;
+ELSE
+	pHead := pMove^.pNext;
+END_IF
+
+IF pMove^.pNext <> 0 THEN
+	pTemp := pMove^.pNext;
+	pTemp^.pPrev := pMove^.pPrev;
+ELSE 
+	pTail := pMove^.pPrev;
+END_IF
+
+// insert after 
+pMove^.pPrev := pAfter;
+pMove^.pNext := pAfter^.pNext;
+
+IF pAfter^.pNext <> 0 THEN
+	pTemp := pAfter^.pNext;
+	pTemp^.pPrev := pMove;
+ELSE
+	pTail := pMove;
+END_IF
+
+pAfter^.pNext := pMove;
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="remove" Id="{f88a8e8b-e557-4cd5-a02f-b3251dcd82d7}">
       <Declaration><![CDATA[METHOD remove : BOOL
 VAR_INPUT
 	index : UINT;
 END_VAR
-]]></Declaration>
+VAR
+	pNode : POINTER TO ST_Node;
+	pPrevNode : POINTER TO ST_Node;
+	pNextNode : POINTER TO ST_Node;
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[pNode := getNode(index);
+pPrevNode := pNode^.pPrev;
+pNextNode := pNode^.pNext;
+
+pPrevNode^.pNext := pNextNode;
+pNextNode^.pPrev := pPrevNode;
+
+__DELETE(pNode);
+count := count - 1;]]></ST>
       </Implementation>
     </Method>
   </POU>
