@@ -3,8 +3,26 @@
   <Itf Name="I_HeatingElement" Id="{38dcd78f-e4ad-41ec-b17e-8151452404c0}">
     <Declaration><![CDATA[INTERFACE I_HeatingElement EXTENDS I_ComponentBase
 ]]></Declaration>
-    <Property Name="Power" Id="{aa955202-bcc7-49e6-be3e-6b2adf5c56b5}">
-      <Declaration><![CDATA[PROPERTY Power : BOOL]]></Declaration>
+    <Method Name="Disable" Id="{5d720d53-a516-4a71-b3fd-ec1834526b72}">
+      <Declaration><![CDATA[METHOD Disable
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Enable" Id="{8d070dc6-e5b9-459f-a65f-7ad370818820}">
+      <Declaration><![CDATA[METHOD Enable
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Init" Id="{149fcbbe-5683-4eaa-a18f-baf6265cdab8}">
+      <Declaration><![CDATA[METHOD Init
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="isHeating" Id="{aa955202-bcc7-49e6-be3e-6b2adf5c56b5}">
+      <Declaration><![CDATA[PROPERTY isHeating : BOOL]]></Declaration>
       <Get Name="Get" Id="{c05e11db-a7b4-4d98-ad2a-a83f8c7d438e}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
@@ -21,5 +39,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Property Name="State" Id="{3e32a0d7-7de8-45d6-b51b-a5cc1b41cfc3}">
+      <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
+      <Get Name="Get" Id="{116f19d7-8cf5-4b59-962c-cda4acd476bf}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
   </Itf>
 </TcPlcObject>

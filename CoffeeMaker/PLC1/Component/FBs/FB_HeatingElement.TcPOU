@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_HeatingElement" Id="{96f3a9f0-42cb-4156-af01-85514b68b235}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_HeatingElement EXTENDS FB_ComponentBase IMPLEMENTS I_HeatingElement
+VAR
+	_enabled 	: BOOL;				
+	_output  	AT %Q* : BOOL;
+	_state		: E_State := ABORTED;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[///////////////////////////////////////////////////////////////////////////////////////////
+//
+//	States:
+//	Before initializing: ABORTED
+//	Once initialized, disabled: STOPPED
+//	Once initialized, enabled: IDLE
+//	Once enabled, PowerOn: EXECUTE
+//	Once enabled, PowerOff: IDLE
+//
+//
+//
+]]></ST>
+    </Implementation>
+    <Method Name="Disable" Id="{27106d6a-4292-4cc8-942c-49ea21dc9af7}">
+      <Declaration><![CDATA[METHOD Disable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_enabled := FALSE;
+PowerOff();
+_State := STOPPED;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Enable" Id="{47265e9f-e11f-4c11-b54d-8bcef40f5661}">
+      <Declaration><![CDATA[METHOD Enable
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_enabled := TRUE;
+_State := IDLE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Init" Id="{ded90bbb-33b1-446f-bf83-145ce1aa46d0}">
+      <Declaration><![CDATA[METHOD Init
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_enabled := FALSE;
+PowerOff();
+_State := STOPPED;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="isHeating" Id="{6d5582a3-e5bc-4b51-bb49-67faeb1b2e52}">
+      <Declaration><![CDATA[PROPERTY isHeating : BOOL
+]]></Declaration>
+      <Get Name="Get" Id="{1736e8f1-3528-439d-9478-9015bf72eac0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[isHeating := _output;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="PowerOff" Id="{59908f49-21fe-4588-a981-65362939a12a}">
+      <Declaration><![CDATA[METHOD PowerOff : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_output := FALSE;
+_State := IDLE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PowerOn" Id="{c293af04-ea37-4eab-a009-fd29fc83aa9e}">
+      <Declaration><![CDATA[METHOD PowerOn : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _enabled THEN
+	_output := TRUE;
+	_State := EXECUTE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="State" Id="{2e7b7cfe-045f-4df6-a825-628e66d97828}">
+      <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
+      <Get Name="Get" Id="{9cc6bab6-0bab-454c-b569-d6ca41ccd59e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

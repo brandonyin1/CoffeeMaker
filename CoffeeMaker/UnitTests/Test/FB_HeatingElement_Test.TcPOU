@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_HeatingElement_Test" Id="{50220cff-0ea3-42a8-86ed-fed194e52866}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_HeatingElement_Test EXTENDS FB_TestSuite
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Initialization();
+EnableTriggersIdleState();
+PowerOffSendsOutput();
+PowerOnSendsOutput();
+DisableOverridesOutput();
+]]></ST>
+    </Implementation>
+    <Method Name="DisableOverridesOutput" Id="{206eea71-1bea-4bd3-9111-7ff490d03e81}">
+      <Declaration><![CDATA[METHOD DisableOverridesOutput : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+
+VAR
+	fbHeatingElement: FB_HeatingElement;
+	expectedState: E_State;
+	actualState: E_State;
+	expectedIsHeating: BOOL;
+	actualIsHeating: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('DisableOverridesOutput');
+
+fbHeatingElement.Init();
+fbHeatingElement.Enable();
+fbHeatingElement.PowerOn();
+fbHeatingElement.Disable();
+
+expectedState := STOPPED;
+actualState := fbHeatingElement.State;
+AssertEquals(Expected := expectedState, Actual := actualState, Message := 'State was not STOP following Disable');
+
+expectedIsHeating := FALSE;
+actualIsHeating := fbHeatingElement.isHeating;
+AssertEquals(Expected := expectedIsHeating, Actual := actualIsHeating, Message := 'isHeating was not FALSE following Disable');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="EnableTriggersIdleState" Id="{8ae36788-1b71-4a9f-a617-d852c3238669}">
+      <Declaration><![CDATA[METHOD EnableTriggersIdleState : REFERENCE TO FB_Test
+VAR
+	fbHeatingElement : FB_HeatingElement;
+	expectedState: E_State;
+	actualState: E_State;
+	actualIsHeating: BOOL;
+	expectedIsHeating: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('EnableTriggersIdleState');
+
+fbHeatingElement.Init();
+fbHeatingElement.Enable();
+
+expectedState := IDLE;
+actualState := fbHeatingElement.State;
+AssertEquals(Expected := expectedState, Actual := actualState, Message := 'State was not IDLE following enable');
+
+expectedIsHeating := FALSE;
+actualIsHeating := fbHeatingElement.isHeating;
+AssertEquals(Expected := expectedIsHeating, Actual := actualIsHeating, Message := 'isHeating was not FALSE following enable without powerOn');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Initialization" Id="{df243ef9-bee9-4bde-8bb4-be24887adba3}">
+      <Declaration><![CDATA[METHOD Initialization : REFERENCE TO FB_Test
+VAR
+	fbHeatingElement : FB_HeatingElement;
+	
+	expectedState : E_State;
+	actualState : E_State;
+	
+	expectedIsHeating : BOOL := FALSE;
+	actualIsHeating : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('Initialization');
+
+expectedState := ABORTED;
+actualState := fbHeatingElement.State;
+AssertEquals(Expected := expectedState, Actual := actualState, Message := 'State was not ABORTED before initialization');
+
+fbHeatingElement.Init();
+
+expectedState := STOPPED;
+actualState := fbHeatingElement.State;
+AssertEquals(Expected := expectedState, Actual := actualState, Message := 'State was not STOPPED following initialization');
+
+expectedIsHeating := FALSE;
+actualIsHeating := fbHeatingElement.isHeating;
+AssertEquals(Expected := expectedIsHeating, Actual := actualIsHeating, Message := 'isHeating was not FALSE following initialization');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PowerOffSendsOutput" Id="{a5d37bc2-5410-4665-a0c5-d246b8848cd5}">
+      <Declaration><![CDATA[METHOD PowerOffSendsOutput : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+
+VAR
+	fbHeatingElement: FB_HeatingElement;
+	expectedState: E_State;
+	actualState: E_State;
+	expectedIsHeating: BOOL;
+	actualIsHeating: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('PowerOffSendsOutput');
+
+fbHeatingElement.Init();
+fbHeatingElement.Enable();
+fbHeatingElement.PowerOff();
+
+expectedState := IDLE;
+actualState := fbHeatingElement.State;
+AssertEquals(Expected := expectedState, Actual := actualState, Message := 'State was not IDLE following powerOff');
+
+expectedIsHeating := FALSE;
+actualIsHeating := fbHeatingElement.isHeating;
+AssertEquals(Expected := expectedIsHeating, Actual := actualIsHeating, Message := 'isHeating was not FALSE following powerOff');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="PowerOnSendsOutput" Id="{63b9a6b8-6c9f-429f-a812-992b6c70e24d}">
+      <Declaration><![CDATA[METHOD PowerOnSendsOutput : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+
+VAR
+	fbHeatingElement: FB_HeatingElement;
+	expectedState: E_State;
+	actualState: E_State;
+	expectedIsHeating: BOOL;
+	actualIsHeating: BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('PowerOnSendsOutput');
+
+fbHeatingElement.Init();
+fbHeatingElement.Enable();
+fbHeatingElement.PowerOn();
+
+expectedState := EXECUTE;
+actualState := fbHeatingElement.State;
+AssertEquals(Expected := expectedState, Actual := actualState, Message := 'State was not EXECUTE following powerOn');
+
+expectedIsHeating := TRUE;
+actualIsHeating := fbHeatingElement.isHeating;
+AssertEquals(Expected := expectedIsHeating, Actual := actualIsHeating, Message := 'isHeating was not TRUE following powerOn');
+
+TEST_FINISHED();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

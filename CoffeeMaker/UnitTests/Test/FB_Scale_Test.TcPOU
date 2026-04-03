@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Scale_Test" Id="{5eafc74b-3c6f-4de1-82a7-e7d02c2098fe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Scale_Test EXTENDS FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Initialization();
+ValidReading();
+UpdateRefreshesWeight();
+TareFunction();
+WeightReadingAfterTare();
+InvalidReadingDetection();
+InvalidReadingDoesNotUpdateGoodValue();
+ScaleRateCalculation();]]></ST>
+    </Implementation>
+    <Method Name="Initialization" Id="{6f49c0a2-6793-4127-ac69-fc37b07fb045}">
+      <Declaration><![CDATA[METHOD Initialization : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InvalidReadingDetection" Id="{27103677-a0da-46f5-843d-c5afcb532529}">
+      <Declaration><![CDATA[METHOD InvalidReadingDetection : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="InvalidReadingDoesNotUpdateGoodValue" Id="{cde06045-d959-498a-b3a0-e4c9490523f4}">
+      <Declaration><![CDATA[METHOD InvalidReadingDoesNotUpdateGoodValue : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ScaleRateCalculation" Id="{5769c487-9a58-4cfd-a1c0-d0c0aaac3923}">
+      <Declaration><![CDATA[METHOD ScaleRateCalculation : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TareFunction" Id="{0c9b3cdb-0958-4508-a012-d73a284963f8}">
+      <Declaration><![CDATA[METHOD TareFunction : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UpdateRefreshesWeight" Id="{ac398cbf-ed3f-4f12-aeaf-b248f7a0a566}">
+      <Declaration><![CDATA[METHOD UpdateRefreshesWeight : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ValidReading" Id="{d65a9b13-06f1-412a-a7a1-46a5b51defdb}">
+      <Declaration><![CDATA[METHOD ValidReading : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WeightReadingAfterTare" Id="{612403bc-c5c1-4f82-b07f-d86099061365}">
+      <Declaration><![CDATA[METHOD WeightReadingAfterTare : REFERENCE TO FB_Test
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
